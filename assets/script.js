@@ -25,8 +25,13 @@ function writePassword2() {
   // NUMERIC CHARACTERS?
   var nu = confirm("Do you want to include numeric chars? (Cancel = No)");
 
-  // SPECIAL CHARACTERS?
-  var sp = confirm("Do you want to include special chars? (Cancel = No)");
+  if (lc == false && uc == false && nu == false) {
+    alert("Only Special Characters are left so they will be used.");
+    sp = true;
+  } else
+    // SPECIAL CHARACTERS?
+    var sp = confirm("Do you want to include special chars? (Cancel = No)");
+
 
   var ucChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var ucArray = Array.from(ucChars);
@@ -52,114 +57,129 @@ function writePassword2() {
   };
   console.log(incChars);
 
-  var newPW = "";
-  for (var i = 0; i < pwLength; i++) {
-    newPW += incChars.charAt(Math.floor(Math.random() * incChars.length));
-    console.log(pwLength);
-  }
+  var genPW = true;
+  while (genPW == true) {
+    var newPW = "";
+    for (var i = 0; i < pwLength; i++) {
+      newPW += incChars.charAt(Math.floor(Math.random() * incChars.length));
+      console.log(pwLength);
+    // }
 
-  // Now see if the random newPW includes all the required segements and if not re-generate
-  var pwOK = false;
-  //Check for lc
-  if (lc == true) {
-    //iterate through each char of newPW and see if it is in lcChars
-    //while check = true take charAt(i=1 to newPW.length)
-    console.log("gonna check for lower case chars!");
-    var checkLetter = "";
-    var i;
-    for (i = 0; i < newPW.length; i++) {
-      checkLetter = newPW.charAt(i);
-      if (lcArray.indexOf(checkLetter) > -1) {
-        lcGood = true;
-        i = newPW.length;
+    // Now see if the random newPW includes all the required segements and if not let user know they need to re-generate
+    // var pwOK = false;
+    //Check for lc
+    if (lc == true) {
+      //iterate through each char of newPW and see if it is in lcChars
+      //while check = true take charAt(i=1 to newPW.length)
+      console.log("gonna check for lower case chars!");
+      var checkLetter = "";
+      var i;
+      for (i = 0; i < newPW.length; i++) {
+        checkLetter = newPW.charAt(i);
+        if (lcArray.indexOf(checkLetter) > -1) {
+          lcGood = true;
+          genPW = false;
+          i = newPW.length;
+        } else {
+          lcGood = false;
+        }
+        console.log("lcGood: " + lcGood);
+      };
+    };
+
+    //Check for uc
+    if (uc == true) {
+      //iterate through each char of newPW and see if it is in ucChars
+      //while check = true take charAt(i=1 to newPW.length)
+      console.log("gonna check for upper case chars!");
+      var checkLetter = "";
+      var i;
+      for (i = 0; i < newPW.length; i++) {
+        checkLetter = newPW.charAt(i);
+        if (ucArray.indexOf(checkLetter) > -1) {
+          ucGood = true;
+          genPW = false;
+          i = newPW.length;
+        } else {
+          ucGood = false;
+        }
+        console.log("ucGood: " + ucGood);
+      };
+    };
+
+    //Check for Numeric
+    if (nu == true) {
+      //iterate through each char of newPW and see if it is in nuChars
+      //while check = true take charAt(i=1 to newPW.length)
+      console.log("gonna check for numeric chars!");
+      var checkLetter = "";
+      var i;
+      for (i = 0; i < newPW.length; i++) {
+        checkLetter = newPW.charAt(i);
+        if (nuArray.indexOf(checkLetter) > -1) {
+          nuGood = true;
+          genPW = false;
+          i = newPW.length;
+        } else {
+          nuGood = false;
+        }
+        console.log("nuGood: " + nuGood);
+      };
+    };
+
+    //Check for Special Characters
+    if (sp == true) {
+      //iterate through each char of newPW and see if it is in spChars
+      //while check = true take charAt(i=1 to newPW.length)
+      console.log("gonna check for special chars!");
+      var checkLetter = "";
+      var i;
+      for (i = 0; i < newPW.length; i++) {
+        checkLetter = newPW.charAt(i);
+        if (spArray.indexOf(checkLetter) > -1) {
+          spGood = true;
+          genPW = false;
+          i = newPW.length;
+        } else {
+          spGood = false;
+        }
+        console.log("spGood: " + spGood);
+      };
+    };
+
+    if (lcGood == false || ucGood == false || nuGood == false || spGood == false) {
+        // pwOK = false;
+        // alert("Oh boy. The password does not meet all of your requirements. It would be best to generate a new one.");
+        // genPW = true;
+        console.log("lc-"+lcGood + "uc-"+ucGood + "nu-"+nuGood + "sp-"+spGood + "genPW-"+genPW)
       } else {
-        lcGood = false;
-      }
-      console.log("lcGood: " + lcGood);
+        // genPW = false;
+        console.log("lc-"+lcGood + "uc-"+ucGood + "nu-"+nuGood + "sp-"+spGood + "genPW-"+genPW)
+      };
     };
   };
-  //Check for UC
-  if (uc == true) {
-    //iterate through each char of newPW and see if it is in lcChars
-    //while check = true take charAt(i=1 to newPW.length)
-    console.log("gonna check for upper case chars!");
-    var checkLetter = "";
-    var i;
-    for (i = 0; i < newPW.length; i++) {
-      checkLetter = newPW.charAt(i);
-      if (ucArray.indexOf(checkLetter) > -1) {
-        ucGood = true;
-        i = newPW.length;
-      } else {
-        ucGood = false;
-      }
-      console.log("ucGood: " + ucGood);
-    };
-  };
-//Check for Numeric
-if (nu == true) {
-  //iterate through each char of newPW and see if it is in lcChars
-  //while check = true take charAt(i=1 to newPW.length)
-  console.log("gonna check for numeric chars!");
-  var checkLetter = "";
-  var i;
-  for (i = 0; i < newPW.length; i++) {
-    checkLetter = newPW.charAt(i);
-    if (nuArray.indexOf(checkLetter) > -1) {
-      nuGood = true;
-      i = newPW.length;
-    } else {
-      nuGood = false;
-    }
-    console.log("nuGood: " + nuGood);
-  };
-};
-//Check for Special Characters
-if (sp == true) {
-  //iterate through each char of newPW and see if it is in lcChars
-  //while check = true take charAt(i=1 to newPW.length)
-  console.log("gonna check for special chars!");
-  var checkLetter = "";
-  var i;
-  for (i = 0; i < newPW.length; i++) {
-    checkLetter = newPW.charAt(i);
-    if (spArray.indexOf(checkLetter) > -1) {
-      spGood = true;
-      i = newPW.length;
-    } else {
-      spGood = false;
-    }
-    console.log("spGood: " + spGood);
-  };
-};
-if (lcGood == false || ucGood == false || nuGood == false || spGood == false) {
-  pwOK = false;
-  alert("Oh boy. The password does not meet all of your requirements. It would be best to generate a new one.");
-} else {
-  alert("Your new pasword meets all of your requirements! Click OK to see it.");
-}
+
+
 
     var passwordText = document.querySelector("#password");
     console.log(passwordText);
     passwordText.setAttribute("placeholder", newPW);
     return
-  }
 
-  function writePassword() {
-    console.log("button clicked");
-    var password = function generatePassword() {
-      // Below grabs the whole text area with the placeholder Your Secure Password.
-      var passwordText = document.querySelector("#password");
-      console.log(passwordText);
-      // Once the pw is generated placeholder text replaced by generated pw
-      passwordText.setAttribute("placeholder", "abc123");
-      return passwordText;
+    function writePassword() {
+      console.log("button clicked");
+      var password = function generatePassword() {
+        // Below grabs the whole text area with the placeholder Your Secure Password.
+        var passwordText = document.querySelector("#password");
+        // console.log(passwordText);
+        return passwordText;
+      };
     };
 
     return password;
-  };
+    };
 
 
 
-  // Add event listener to generate button
+    // Add event listener to generate button
   generateBtn.addEventListener("click", writePassword2);
