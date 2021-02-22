@@ -42,144 +42,47 @@ function writePassword2() {
   var spChars = "@%+\/'!#$^?:,)(}{][~-_.";
   var spArray = Array.from(spChars);
 
+  // Build list of chars to include, start building pw with at least one char frome each
+  var newPW = "";
   var incChars = "";
   if (lc == true) {
     incChars = lcChars;
+    newPW += lcChars.charAt(Math.floor(Math.random() * lcChars.length));
   };
   if (uc == true) {
     incChars += ucChars;
+    newPW += ucChars.charAt(Math.floor(Math.random() * ucChars.length));
   };
   if (nu == true) {
     incChars += nuChars;
+    newPW += nuChars.charAt(Math.floor(Math.random() * nuChars.length));
   };
   if (sp == true) {
     incChars += spChars;
-  };
-  console.log(incChars);
-
-  var genPW = true;
-  while (genPW == true) {
-    var newPW = "";
-    for (var i = 0; i < pwLength; i++) {
-      newPW += incChars.charAt(Math.floor(Math.random() * incChars.length));
-      console.log(pwLength);
-    // }
-
-    // Now see if the random newPW includes all the required segements and if not let user know they need to re-generate
-    // var pwOK = false;
-    //Check for lc
-    if (lc == true) {
-      //iterate through each char of newPW and see if it is in lcChars
-      //while check = true take charAt(i=1 to newPW.length)
-      console.log("gonna check for lower case chars!");
-      var checkLetter = "";
-      var i;
-      for (i = 0; i < newPW.length; i++) {
-        checkLetter = newPW.charAt(i);
-        if (lcArray.indexOf(checkLetter) > -1) {
-          lcGood = true;
-          genPW = false;
-          i = newPW.length;
-        } else {
-          lcGood = false;
-        }
-        console.log("lcGood: " + lcGood);
-      };
-    };
-
-    //Check for uc
-    if (uc == true) {
-      //iterate through each char of newPW and see if it is in ucChars
-      //while check = true take charAt(i=1 to newPW.length)
-      console.log("gonna check for upper case chars!");
-      var checkLetter = "";
-      var i;
-      for (i = 0; i < newPW.length; i++) {
-        checkLetter = newPW.charAt(i);
-        if (ucArray.indexOf(checkLetter) > -1) {
-          ucGood = true;
-          genPW = false;
-          i = newPW.length;
-        } else {
-          ucGood = false;
-        }
-        console.log("ucGood: " + ucGood);
-      };
-    };
-
-    //Check for Numeric
-    if (nu == true) {
-      //iterate through each char of newPW and see if it is in nuChars
-      //while check = true take charAt(i=1 to newPW.length)
-      console.log("gonna check for numeric chars!");
-      var checkLetter = "";
-      var i;
-      for (i = 0; i < newPW.length; i++) {
-        checkLetter = newPW.charAt(i);
-        if (nuArray.indexOf(checkLetter) > -1) {
-          nuGood = true;
-          genPW = false;
-          i = newPW.length;
-        } else {
-          nuGood = false;
-        }
-        console.log("nuGood: " + nuGood);
-      };
-    };
-
-    //Check for Special Characters
-    if (sp == true) {
-      //iterate through each char of newPW and see if it is in spChars
-      //while check = true take charAt(i=1 to newPW.length)
-      console.log("gonna check for special chars!");
-      var checkLetter = "";
-      var i;
-      for (i = 0; i < newPW.length; i++) {
-        checkLetter = newPW.charAt(i);
-        if (spArray.indexOf(checkLetter) > -1) {
-          spGood = true;
-          genPW = false;
-          i = newPW.length;
-        } else {
-          spGood = false;
-        }
-        console.log("spGood: " + spGood);
-      };
-    };
-
-    if (lcGood == false || ucGood == false || nuGood == false || spGood == false) {
-        // pwOK = false;
-        // alert("Oh boy. The password does not meet all of your requirements. It would be best to generate a new one.");
-        // genPW = true;
-        console.log("lc-"+lcGood + "uc-"+ucGood + "nu-"+nuGood + "sp-"+spGood + "genPW-"+genPW)
-      } else {
-        // genPW = false;
-        console.log("lc-"+lcGood + "uc-"+ucGood + "nu-"+nuGood + "sp-"+spGood + "genPW-"+genPW)
-      };
-    };
+    newPW += spChars.charAt(Math.floor(Math.random() * spChars.length));
   };
 
+  // need to figure out current length of initial pw
+  var initPWlength = newPW.length;
 
+  // randomly generate the remaining chars for pw length minus the intial chars
+  for (var j = 0; j < pwLength-initPWlength; j++) {
+    newPW += incChars.charAt(Math.floor(Math.random() * incChars.length));
+    genPW = false;
+  }
 
     var passwordText = document.querySelector("#password");
-    console.log(passwordText);
     passwordText.setAttribute("placeholder", newPW);
     return
 
     function writePassword() {
-      console.log("button clicked");
       var password = function generatePassword() {
         // Below grabs the whole text area with the placeholder Your Secure Password.
         var passwordText = document.querySelector("#password");
-        // console.log(passwordText);
         return passwordText;
       };
     };
-
-    return password;
-    };
-
-
+  };
 
     // Add event listener to generate button
   generateBtn.addEventListener("click", writePassword2);
