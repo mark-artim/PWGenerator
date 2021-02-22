@@ -6,7 +6,7 @@ function writePassword2() {
   // PROMPT FOR PW LENGTH BETWEEN 8 AND 28
   var ask = "true";
   while (ask) {
-    var pwLength = prompt("Enter password length (8-128 characters): ", "8 - 128");
+    var pwLength = prompt("Enter password length (8-128 characters): ");
     if (lc === null) {
       ask = false;
       break;
@@ -82,7 +82,7 @@ function writePassword2() {
         return passwordText;
       };
     };
-  };
+  }; 
 
     // Add event listener to generate button
   generateBtn.addEventListener("click", writePassword2);
